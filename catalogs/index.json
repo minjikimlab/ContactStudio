@@ -1,0 +1,392 @@
+{
+ "assembly_aliases": {
+  "GRCh38": "hg38",
+  "GRCm38": "mm10"
+ },
+ "attribution": {
+  "encode": "Data from the ENCODE project, encodeproject.org",
+  "fourdn": "Data from the 4D Nucleome Data Portal, data.4dnucleome.org"
+ },
+ "built": "2026-10-20T15:08:16+00:00",
+ "encode_default_output_types": [
+  "IDR thresholded peaks",
+  "conservative IDR thresholded peaks",
+  "fold change over control",
+  "pseudoreplicated IDR thresholded peaks",
+  "pseudoreplicated peaks",
+  "replicated peaks",
+  "signal p-value"
+ ],
+ "files": [
+  {
+   "agg_rows": 1,
+   "assembly": "hg19",
+   "base": "https://encode-public.s3.amazonaws.com/",
+   "big_rows": 0,
+   "built": "2026-10-20T15:08:16+00:00",
+   "catalog": "encode",
+   "dataset_not_found": 1,
+   "default_rows": 176,
+   "dropped": 0,
+   "dropped_reasons": {},
+   "exp_field_gz_delta": 516,
+   "fetched": 176,
+   "file": "encode.hg19.maps.json.gz",
+   "flab_rows": 4,
+   "gz_bytes": 9392,
+   "kind": "maps",
+   "rep_disambiguated": {
+    "by_file_index": 2,
+    "by_tech": 115
+   },
+   "rows": 176,
+   "schema": "cs-catalog-2",
+   "search_total": 176,
+   "source_query": [
+    "https://www.encodeproject.org/search/?type=File&status=released&format=json&file_format=hic&assembly=hg19&limit=all&field=accession&field=s3_uri&field=file_size&field=assembly&field=output_type&field=assay_title&field=target.label&field=biosample_ontology.term_name&field=biosample_ontology.classification&field=lab.title&field=dataset&field=description&field=biological_replicates&field=technical_replicates&field=file_format&field=date_created&field=filter_value&field=pseudo_haplotype"
+   ],
+   "target_gz_bytes": 204800
+  },
+  {
+   "agg_rows": 0,
+   "assembly": "hg19",
+   "base": "https://encode-public.s3.amazonaws.com/",
+   "big_rows": 0,
+   "built": "2026-10-20T15:08:16+00:00",
+   "catalog": "encode",
+   "dataset_not_found": 0,
+   "default_rows": 23996,
+   "dropped": 60057,
+   "dropped_reasons": {
+    "annotation dataset (no assay_title)": 21004,
+    "not a default output type (not fetched)": 39053
+   },
+   "exp_field_gz_delta": 55641,
+   "fetched": 45000,
+   "file": "encode.hg19.tracks.json.gz",
+   "flab_rows": 131,
+   "gz_bytes": 1166320,
+   "kind": "tracks",
+   "rep_disambiguated": {
+    "by_date": 12
+   },
+   "rows": 23996,
+   "schema": "cs-catalog-2",
+   "search_total": 45000,
+   "source_query": [
+    "https://www.encodeproject.org/search/?type=File&status=released&format=json&file_format=bigWig&assembly=hg19&limit=all&field=accession&field=s3_uri&field=file_size&field=assembly&field=output_type&field=assay_title&field=target.label&field=biosample_ontology.term_name&field=biosample_ontology.classification&field=lab.title&field=dataset&field=description&field=biological_replicates&field=technical_replicates&field=file_format&field=date_created&field=filter_value&field=pseudo_haplotype  [one request per output_type in: signal p-value, fold change over control]",
+    "https://www.encodeproject.org/search/?type=File&status=released&format=json&file_format=bigBed&assembly=hg19&limit=all&field=accession&field=s3_uri&field=file_size&field=assembly&field=output_type&field=assay_title&field=target.label&field=biosample_ontology.term_name&field=biosample_ontology.classification&field=lab.title&field=dataset&field=description&field=biological_replicates&field=technical_replicates&field=file_format&field=date_created&field=filter_value&field=pseudo_haplotype  [one request per output_type in: optimal IDR thresholded peaks, conservative IDR thresholded peaks, pseudoreplicated peaks, replicated peaks, pseudoreplicated IDR thresholded peaks]"
+   ],
+   "target_gz_bytes": 2097152
+  },
+  {
+   "agg_rows": 260,
+   "assembly": "hg38",
+   "base": "https://encode-public.s3.amazonaws.com/",
+   "big_rows": 0,
+   "built": "2026-10-20T15:08:16+00:00",
+   "catalog": "encode",
+   "dataset_not_found": 0,
+   "default_rows": 2612,
+   "dropped": 0,
+   "dropped_reasons": {},
+   "exp_field_gz_delta": 13023,
+   "fetched": 3756,
+   "file": "encode.hg38.maps.json.gz",
+   "flab_rows": 65,
+   "gz_bytes": 196894,
+   "kind": "maps",
+   "rep_disambiguated": {
+    "by_date": 46,
+    "by_file_index": 30,
+    "by_tech": 2302
+   },
+   "rows": 3756,
+   "schema": "cs-catalog-2",
+   "search_total": 3756,
+   "source_query": [
+    "https://www.encodeproject.org/search/?type=File&status=released&format=json&file_format=hic&assembly=GRCh38&limit=all&field=accession&field=s3_uri&field=file_size&field=assembly&field=output_type&field=assay_title&field=target.label&field=biosample_ontology.term_name&field=biosample_ontology.classification&field=lab.title&field=dataset&field=description&field=biological_replicates&field=technical_replicates&field=file_format&field=date_created&field=filter_value&field=pseudo_haplotype"
+   ],
+   "target_gz_bytes": 204800
+  },
+  {
+   "agg_rows": 0,
+   "assembly": "hg38",
+   "base": "https://encode-public.s3.amazonaws.com/",
+   "before_collapse": {
+    "gz_bytes": 4885189,
+    "rows": 82789
+   },
+   "big_rows": 0,
+   "built": "2026-10-20T15:08:16+00:00",
+   "catalog": "encode",
+   "dataset_not_found": 0,
+   "default_rows": 42280,
+   "dropped": 209165,
+   "dropped_reasons": {
+    "annotation dataset (no assay_title)": 31984,
+    "not a default output type (not fetched)": 135129,
+    "optimal IDR peaks where IDR thresholded peaks exist": 1543,
+    "per-replicate file superseded by pooled file": 40509
+   },
+   "exp_field_gz_delta": 91623,
+   "fetched": 116316,
+   "file": "encode.hg38.tracks.json.gz",
+   "flab_rows": 116,
+   "gz_bytes": 2091146,
+   "kind": "tracks",
+   "rep_disambiguated": {
+    "by_date": 23836,
+    "by_file_index": 1011,
+    "by_tech": 26
+   },
+   "rows": 42280,
+   "schema": "cs-catalog-2",
+   "search_total": 116316,
+   "source_query": [
+    "https://www.encodeproject.org/search/?type=File&status=released&format=json&file_format=bigWig&assembly=GRCh38&limit=all&field=accession&field=s3_uri&field=file_size&field=assembly&field=output_type&field=assay_title&field=target.label&field=biosample_ontology.term_name&field=biosample_ontology.classification&field=lab.title&field=dataset&field=description&field=biological_replicates&field=technical_replicates&field=file_format&field=date_created&field=filter_value&field=pseudo_haplotype  [one request per output_type in: signal p-value, fold change over control]",
+    "https://www.encodeproject.org/search/?type=File&status=released&format=json&file_format=bigBed&assembly=GRCh38&limit=all&field=accession&field=s3_uri&field=file_size&field=assembly&field=output_type&field=assay_title&field=target.label&field=biosample_ontology.term_name&field=biosample_ontology.classification&field=lab.title&field=dataset&field=description&field=biological_replicates&field=technical_replicates&field=file_format&field=date_created&field=filter_value&field=pseudo_haplotype  [one request per output_type in: IDR thresholded peaks, pseudoreplicated peaks, conservative IDR thresholded peaks, replicated peaks, optimal IDR thresholded peaks, pseudoreplicated IDR thresholded peaks]"
+   ],
+   "target_gz_bytes": 2097152
+  },
+  {
+   "agg_rows": 0,
+   "assembly": "mm10",
+   "base": "https://encode-public.s3.amazonaws.com/",
+   "big_rows": 0,
+   "built": "2026-10-20T15:08:16+00:00",
+   "catalog": "encode",
+   "dataset_not_found": 0,
+   "default_rows": 111,
+   "dropped": 0,
+   "dropped_reasons": {},
+   "exp_field_gz_delta": 540,
+   "fetched": 111,
+   "file": "encode.mm10.maps.json.gz",
+   "flab_rows": 0,
+   "gz_bytes": 6365,
+   "kind": "maps",
+   "rep_disambiguated": {
+    "by_tech": 2
+   },
+   "rows": 111,
+   "schema": "cs-catalog-2",
+   "search_total": 111,
+   "source_query": [
+    "https://www.encodeproject.org/search/?type=File&status=released&format=json&file_format=hic&assembly=mm10&limit=all&field=accession&field=s3_uri&field=file_size&field=assembly&field=output_type&field=assay_title&field=target.label&field=biosample_ontology.term_name&field=biosample_ontology.classification&field=lab.title&field=dataset&field=description&field=biological_replicates&field=technical_replicates&field=file_format&field=date_created&field=filter_value&field=pseudo_haplotype"
+   ],
+   "target_gz_bytes": 204800
+  },
+  {
+   "agg_rows": 0,
+   "assembly": "mm10",
+   "base": "https://encode-public.s3.amazonaws.com/",
+   "big_rows": 0,
+   "built": "2026-10-20T15:08:16+00:00",
+   "catalog": "encode",
+   "dataset_not_found": 0,
+   "default_rows": 16460,
+   "dropped": 20372,
+   "dropped_reasons": {
+    "annotation dataset (no assay_title)": 1576,
+    "not a default output type (not fetched)": 18641,
+    "optimal IDR peaks where IDR thresholded peaks exist": 155
+   },
+   "exp_field_gz_delta": 29365,
+   "fetched": 18191,
+   "file": "encode.mm10.tracks.json.gz",
+   "flab_rows": 156,
+   "gz_bytes": 766212,
+   "kind": "tracks",
+   "rep_disambiguated": {
+    "by_date": 12450,
+    "by_file_index": 6
+   },
+   "rows": 16460,
+   "schema": "cs-catalog-2",
+   "search_total": 18191,
+   "source_query": [
+    "https://www.encodeproject.org/search/?type=File&status=released&format=json&file_format=bigWig&assembly=mm10&limit=all&field=accession&field=s3_uri&field=file_size&field=assembly&field=output_type&field=assay_title&field=target.label&field=biosample_ontology.term_name&field=biosample_ontology.classification&field=lab.title&field=dataset&field=description&field=biological_replicates&field=technical_replicates&field=file_format&field=date_created&field=filter_value&field=pseudo_haplotype  [one request per output_type in: fold change over control, signal p-value]",
+    "https://www.encodeproject.org/search/?type=File&status=released&format=json&file_format=bigBed&assembly=mm10&limit=all&field=accession&field=s3_uri&field=file_size&field=assembly&field=output_type&field=assay_title&field=target.label&field=biosample_ontology.term_name&field=biosample_ontology.classification&field=lab.title&field=dataset&field=description&field=biological_replicates&field=technical_replicates&field=file_format&field=date_created&field=filter_value&field=pseudo_haplotype  [one request per output_type in: pseudoreplicated peaks, replicated peaks, IDR thresholded peaks, conservative IDR thresholded peaks, optimal IDR thresholded peaks, pseudoreplicated IDR thresholded peaks]"
+   ],
+   "target_gz_bytes": 2097152
+  },
+  {
+   "agg_rows": 24,
+   "assembly": "hg38",
+   "base": "https://4dn-open-data-public.s3.amazonaws.com/",
+   "big_rows": 0,
+   "built": "2026-10-20T15:08:16+00:00",
+   "catalog": "fourdn",
+   "default_rows": 829,
+   "dropped": 0,
+   "dropped_reasons": {},
+   "exp_field_gz_delta": 5565,
+   "fetched": 1168,
+   "file": "fourdn.hg38.maps.json.gz",
+   "flab_rows": 0,
+   "gz_bytes": 52273,
+   "kind": "maps",
+   "rep_disambiguated": {
+    "by_date": 256,
+    "by_file_index": 10
+   },
+   "row_notes": {
+    "no_experiment_set": 454,
+    "no_lab": 455
+   },
+   "rows": 829,
+   "schema": "cs-catalog-2",
+   "search_total": 1168,
+   "skipped_other_assemblies": {
+    "(none)": 10,
+    "GRCz11": 43,
+    "dm6": 8,
+    "galGal5": 126
+   },
+   "source_query": [
+    "https://data.4dnucleome.org/search/?type=FileProcessed&status=released&format=json&file_format.file_format=hic&field=accession&field=open_data_url&field=file_size&field=genome_assembly&field=file_type&field=file_format.file_format&field=track_and_facet_info&field=status&field=lab.display_title&field=experiment_sets.accession&field=source_experiment_sets.display_title&field=date_created&field=description  [paged with from/limit=1000]"
+   ],
+   "target_gz_bytes": 204800
+  },
+  {
+   "agg_rows": 224,
+   "assembly": "hg38",
+   "base": "https://4dn-open-data-public.s3.amazonaws.com/",
+   "big_rows": 1266,
+   "built": "2026-10-20T15:08:16+00:00",
+   "catalog": "fourdn",
+   "default_rows": 0,
+   "dropped": 0,
+   "dropped_reasons": {},
+   "exp_field_gz_delta": 12876,
+   "fetched": 7515,
+   "file": "fourdn.hg38.tracks.json.gz",
+   "flab_rows": 132,
+   "gz_bytes": 280581,
+   "kind": "tracks",
+   "rep_disambiguated": {
+    "by_date": 144,
+    "by_description": 2319,
+    "by_file_index": 46
+   },
+   "row_notes": {
+    "no_experiment_set": 454,
+    "no_lab": 455
+   },
+   "rows": 5394,
+   "schema": "cs-catalog-2",
+   "search_total": 7515,
+   "skipped_other_assemblies": {
+    "(none)": 10,
+    "GRCz11": 43,
+    "dm6": 8,
+    "galGal5": 126
+   },
+   "source_query": [
+    "https://data.4dnucleome.org/search/?type=FileProcessed&status=released&format=json&file_format.file_format=bw&file_format.file_format=bigbed&file_format.file_format=bed&field=accession&field=open_data_url&field=file_size&field=genome_assembly&field=file_type&field=file_format.file_format&field=track_and_facet_info&field=status&field=lab.display_title&field=experiment_sets.accession&field=source_experiment_sets.display_title&field=date_created&field=description  [paged with from/limit=1000]"
+   ],
+   "target_gz_bytes": 2097152
+  },
+  {
+   "agg_rows": 2,
+   "assembly": "mm10",
+   "base": "https://4dn-open-data-public.s3.amazonaws.com/",
+   "big_rows": 0,
+   "built": "2026-10-20T15:08:16+00:00",
+   "catalog": "fourdn",
+   "default_rows": 267,
+   "dropped": 4,
+   "dropped_reasons": {
+    "target longer than 200 chars": 4
+   },
+   "exp_field_gz_delta": 1630,
+   "fetched": 1168,
+   "file": "fourdn.mm10.maps.json.gz",
+   "flab_rows": 0,
+   "gz_bytes": 18736,
+   "kind": "maps",
+   "rep_disambiguated": {
+    "by_date": 180
+   },
+   "row_notes": {
+    "no_experiment_set": 454,
+    "no_lab": 455
+   },
+   "rows": 267,
+   "schema": "cs-catalog-2",
+   "search_total": 1168,
+   "skipped_other_assemblies": {
+    "(none)": 10,
+    "GRCz11": 43,
+    "dm6": 8,
+    "galGal5": 126
+   },
+   "source_query": [
+    "https://data.4dnucleome.org/search/?type=FileProcessed&status=released&format=json&file_format.file_format=hic&field=accession&field=open_data_url&field=file_size&field=genome_assembly&field=file_type&field=file_format.file_format&field=track_and_facet_info&field=status&field=lab.display_title&field=experiment_sets.accession&field=source_experiment_sets.display_title&field=date_created&field=description  [paged with from/limit=1000]"
+   ],
+   "target_gz_bytes": 204800
+  },
+  {
+   "agg_rows": 212,
+   "assembly": "mm10",
+   "base": "https://4dn-open-data-public.s3.amazonaws.com/",
+   "big_rows": 1088,
+   "built": "2026-10-20T15:08:16+00:00",
+   "catalog": "fourdn",
+   "default_rows": 0,
+   "dropped": 0,
+   "dropped_reasons": {},
+   "exp_field_gz_delta": 6409,
+   "fetched": 7515,
+   "file": "fourdn.mm10.tracks.json.gz",
+   "flab_rows": 40,
+   "gz_bytes": 108613,
+   "kind": "tracks",
+   "rep_disambiguated": {
+    "by_date": 12,
+    "by_description": 107
+   },
+   "row_notes": {
+    "no_experiment_set": 454,
+    "no_lab": 455
+   },
+   "rows": 2002,
+   "schema": "cs-catalog-2",
+   "search_total": 7515,
+   "skipped_other_assemblies": {
+    "(none)": 10,
+    "GRCz11": 43,
+    "dm6": 8,
+    "galGal5": 126
+   },
+   "source_query": [
+    "https://data.4dnucleome.org/search/?type=FileProcessed&status=released&format=json&file_format.file_format=bw&file_format.file_format=bigbed&file_format.file_format=bed&field=accession&field=open_data_url&field=file_size&field=genome_assembly&field=file_type&field=file_format.file_format&field=track_and_facet_info&field=status&field=lab.display_title&field=experiment_sets.accession&field=source_experiment_sets.display_title&field=date_created&field=description  [paged with from/limit=1000]"
+   ],
+   "target_gz_bytes": 2097152
+  }
+ ],
+ "hosts": {
+  "encode": "encode-public.s3.amazonaws.com",
+  "fourdn": "4dn-open-data-public.s3.amazonaws.com"
+ },
+ "row_fields": [
+  "id",
+  "name",
+  "biosample",
+  "assay",
+  "target",
+  "lab",
+  "out",
+  "fmt",
+  "url (relative to the file's base)",
+  "size",
+  "rep",
+  "exp",
+  "def?",
+  "big?",
+  "agg?",
+  "flab?"
+ ],
+ "schema": "cs-catalog-2"
+}
