@@ -9,6 +9,13 @@ differences: this copy can contact other sites (so it streams GEO files, ENCODE 
 Dropbox links, and downloads genes for other genomes), it saves sessions
 in your browser and as files (no Claude account storage), and exports go to your Downloads folder.
 
+## Hosted copy
+
+The current build is served at **https://minjikimlab.github.io/ContactStudio/** (GitHub Pages, from the public
+repository https://github.com/minjikimlab/ContactStudio). Open that address in Chrome and everything in this
+README works without installing anything; share links made there point at it. The repository holds only this
+built folder; the source and tests live elsewhere.
+
 ## Browsers
 
 Tested only in **Google Chrome on macOS** (headless Chrome, the build of 2026-10-19), opened from disk
