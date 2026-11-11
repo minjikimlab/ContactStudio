@@ -4,42 +4,62 @@ A Hi-C contact map browser that runs entirely in your web browser: open `.hic` f
 them from GEO, compare samples side by side, add gene, chromHMM, bigWig, bigBed, bedGraph, BED and BEDPE
 tracks, export figures, and share sessions as links.
 
-This folder is the same app as the Contact Studio page in Claude, built from the same source. The
-differences: this copy can contact other sites (so it streams GEO files, ENCODE and 4DN files, web URLs and
+This folder is the app that the web page https://minjikimlab.github.io/ContactStudio/ serves (use that page
+when you can, see below), and the same app as the Contact Studio page in Claude, built from the same source.
+The differences from the page in Claude: this copy can contact other sites (so it streams GEO files, ENCODE and 4DN files, web URLs and
 Dropbox links, and downloads genes for other genomes), it saves sessions
 in your browser and as files (no Claude account storage), and exports go to your Downloads folder.
 
-## Hosted copy
+## Use it on the web (recommended)
 
-The current build is served at **https://minjikimlab.github.io/ContactStudio/** (GitHub Pages, from the public
-repository https://github.com/minjikimlab/ContactStudio). Open that address in Chrome and everything in this
-README works without installing anything; share links made there point at it. The repository holds only this
-built folder; the source and tests live elsewhere.
+Open **https://minjikimlab.github.io/ContactStudio/** in Chrome or Edge. This is the main way to use Contact
+Studio: nothing to install, and everything in this README works there, in particular
+
+- **sessions reopen their local files without a question:** remember your data folder once (Session ▾ →
+  **Folders on this computer…** → *Remember a data folder…*, or drop the folder on the page) and choose
+  **"Allow on every visit"** when Chrome asks; from then on a session opens its files by itself;
+- **Sign in with Google** for private Google Cloud buckets (the lab's client ID is built in);
+- share links point at this address, so they work for anyone.
+
+The page is served by GitHub Pages from the public repository https://github.com/minjikimlab/ContactStudio,
+which holds only this built folder (the source and tests live elsewhere). The page runs entirely in your
+browser: your files are read on your computer and never uploaded.
 
 ## Browsers
 
-Tested only in **Google Chrome on macOS** (headless Chrome, the build of 2026-10-19), opened from disk
-(`file://`) and served over `http://127.0.0.1`. Edge, Firefox, Safari, Windows and Linux have **not been
-tested**. The code feature-detects what it needs (CompressionStream, DecompressionStream, and the File
-System Access API for "Reconnect files", which only Chromium browsers have); where something is missing,
-choosing or dropping files by hand still works, but this has not been checked in those browsers.
+Tested only in **Google Chrome on macOS** (headless Chrome, the build of 2026-11-10), served over
+`http://127.0.0.1` (the same files as the web page) and opened from disk (`file://`); "Allow on every visit",
+reopening after a restart and Google sign-in were confirmed by a person in real Chrome on 2026-11-10. Edge,
+Firefox, Safari, Windows and Linux have **not been tested**. The code feature-detects what it needs
+(CompressionStream, DecompressionStream, and the File System Access API for reopening files and the sessions
+folder, which only Chromium browsers have); where something is missing, choosing or dropping files by hand still
+works, but this has not been checked in those browsers.
 
-## Three ways to run it
+## Other ways to run it
 
-1. **Double-click `index.html`.** It opens from disk (`file://`); tested in Chrome (see above).
-   Everything works there, including GEO streaming. Keep `genomes/` and `example/` next to `index.html`.
-   An internet connection is needed for the `.hic` reader (loaded from cdn.jsdelivr.net) and for GEO.
-   Share links made from a copy opened this way only work on your own computer (see below).
-
-2. **Serve the folder locally.** In a terminal:
+1. **A local copy, served.** When you want to work from this folder (offline data, an unreleased build): in a
+   terminal,
 
    ```
    cd ContactStudio
    python3 -m http.server 8000
    ```
 
-   then open <http://localhost:8000/>. Same features; useful when your browser restricts `file://` pages.
-   Share links made from `localhost` also work only on your computer; the share dialog warns about this.
+   and open the address it prints. Check the line **"Serving HTTP on … port 8000"**: if the port is already
+   used by something else (8765 was on one of our Macs), Python stops with "Address already in use"; pick
+   another number (8000, 8080, 8921…). Remembered permissions work here as on the web page (Chrome treats
+   `http://localhost` like a web address). For Google sign-in, `http://localhost:<port>` must be listed among
+   the client ID's authorized origins (see "Google Cloud Storage"). Share links made from `localhost` work only on
+   your computer; the share dialog says so.
+
+2. **Double-click `index.html`** (`file://`). It works, including GEO streaming, with two limits:
+   - **No remembered permissions:** Chrome offers only *Allow* / *Block* for a page opened from a file and
+     forgets the answer when it closes, so after every restart a session asks again (once per data folder).
+   - **No Google sign-in** (Google accepts sign-ins only from web addresses); a pasted access token works.
+
+   The page says both where they matter and points to the web page. Share links made from a copy opened this
+   way work only on your own computer. Keep `genomes/` and `example/` next to `index.html`; an internet
+   connection is needed for the `.hic` reader (cdn.jsdelivr.net) and for GEO.
 
 3. **Host it for your lab.** Copy the folder to any static web server (a lab or department server,
    GitHub Pages, Netlify, an S3 bucket). No server code is needed. With GitHub Pages: create a
@@ -151,9 +171,91 @@ sign-in is needed.
   script in `index.html`, and **From URL…** shows a **Choose from Dropbox…** button. It only appears on a
   hosted copy (http/https), never when the page is opened from disk.
 
+## Google Cloud Storage
+
+Paste `gs://bucket/path/file.hic` (or a `storage.googleapis.com`, `storage.cloud.google.com` or Cloud Console
+link) into **+ Sample ▾ → From URL…**, or browse a bucket with **+ Sample ▾ → From Google Cloud Storage…**.
+Maps, bigWig and bigBed files stream from Google in pieces, as from GEO; bedGraph, BED and BEDPE files
+(also bgzipped `.gz`) are downloaded and parsed in the page. File names with spaces work (one address per line).
+
+- **Public files** need nothing.
+- **Private buckets** (the usual case for lab data): when Google refuses a file, the page asks once, with
+  **Sign in with Google** (when this copy has a client ID, see below) and **Paste an access token** (always). Then
+  everything that was waiting continues. To get a token without installing anything: open Cloud Shell
+  (<https://shell.cloud.google.com>), run `gcloud auth print-access-token`, copy the line. Tokens last one hour.
+  After **Sign in with Google** the page renews the sign-in by itself in its last 5 minutes, on your next click
+  anywhere in the page (Google's small window may flash open and closed; if that fails, e.g. pop-ups are blocked,
+  the page asks as before); a pasted token cannot be renewed, so when it expires the page asks again and goes on
+  where it stopped (the view stays).
+- **Buckets you may read but not list** (most data buckets): the browser says so; type the full path of the file
+  in its box. **Requester-pays** buckets ask for the Google Cloud project to bill; sessions keep that project ID.
+- Messages: *No access to gs://…, or it does not exist* (Google does not say which), *Your Google account has no
+  read access to gs://…*, *gs://… does not exist*, *There is no Google Cloud bucket named …*.
+- Sessions and share links keep `gs://` bucket and file names (and the file's generation, so a file overwritten
+  later is noticed), never a token. A recipient is asked once per bucket before anything is read, and needs
+  their own access to private buckets.
+- **After Cancel** on Google's question, the map's panel and its row in the left column keep a **Sign in or paste a
+  token…** button; moving to another view asks once more.
+- **Not available** when the page is opened from disk (`file://`): sign-in only (Google accepts sign-ins only from
+  web addresses; use the web page), a pasted token works. **Inside Claude** neither Google Cloud Storage nor
+  Google's sign-in can be reached; use the web page.
+
+**Privacy of your bucket.** Who may read a bucket is decided by that bucket's permissions (IAM) in Google Cloud,
+and by nothing else: the client ID and this app grant no access. The token from Sign in with Google or Cloud Shell
+stays in the page's memory only (never saved, never in sessions, links, drafts or messages) and is sent only to
+Google's storage address (`storage.googleapis.com`), in a request header, and only with reads of buckets that refused
+to be read without it (a public bucket of another lab is read anonymously even while you are signed in). File
+contents go straight from Google
+to your browser; nothing is copied, proxied, cached on disk or logged. A session or share link names the bucket
+and the files (names can themselves be telling): the Share dialog says so when such files are in the session,
+and whoever opens the link without access sees only "no access, or it does not exist".
+
+**Turning on "Sign in with Google" for your lab (about 5 minutes, once).** It needs an OAuth client ID. The client
+ID only identifies this app; it is public, not a secret. The copy on the web page already has the lab's client ID;
+these steps are for another lab or another host. They follow Google's documentation; the lab's own setup was
+confirmed to work in real Chrome on 2026-11-10 (sign-in window on the first click, no "unverified app" warning).
+
+1. Open <https://console.cloud.google.com> and choose or create a project (in your university's organization if
+   there is one).
+2. **Google Auth Platform** (<https://console.developers.google.com/auth/overview>) → **Get started**: app name and
+   support e-mail. Google's sign-in window shows this **app name** to everyone who signs in, so call it
+   "Contact Studio" (a project made for another tool shows that tool's name; change it under Google Auth
+   Platform → **Branding**). **Audience**: *Internal* if offered (Google Workspace or Cloud Identity organization: no
+   verification, no user limit). Otherwise *External*, left in *Testing*, with each lab member's Google address
+   under **Test users** (at most 100; their consent lasts 7 days, then they click through once more).
+3. **Data Access** → Add or remove scopes → `https://www.googleapis.com/auth/devstorage.read_only` (read-only
+   Cloud Storage).
+4. **Clients** → **Create client** → Application type **Web application** → **Authorized JavaScript origins**: the
+   address where you host this folder, origin only (for GitHub Pages `https://<user>.github.io`, no path), and for
+   a local server `http://localhost:<port>` (the port must match the one in Python's "Serving HTTP on" line). A
+   `file://` page cannot be added.
+5. Copy the **Client ID** (`….apps.googleusercontent.com`) into `contact-studio.config.js` next to `index.html`:
+
+   ```js
+   window.CONTACT_STUDIO_CONFIG = {
+     googleClientId: '1234567890-abcdef.apps.googleusercontent.com',
+   };
+   ```
+
+   Rebuilding the app never overwrites this file. Anyone can also type their own lab's client ID in the page
+   (the bucket browser → **Sign-in settings…**; kept in that browser only, used before the file's), which shows the
+   page's address to add to the authorized origins.
+6. Give lab members the **Storage Object Viewer** role on the bucket (IAM) if they do not have it.
+
+Another lab using your hosted copy signs in with their own Google accounts and reads only what their accounts may
+read; if your client ID is *Internal* or in *Testing*, their sign-in is refused and the page tells them to paste a
+token or use their own client ID.
+
 ## Sessions and sharing
 
-- **Session ▾ → Save** keeps the session in this browser; **Export .json** writes a file you can send.
+- **Session ▾ → Save** keeps updating the current session; **Save as…** with another name (or with
+  "Save as a new session" ticked) saves a new session and leaves the old one as it was. A name that is
+  already taken asks: replace that session, or keep both (the new one gets "(2)"). **Export .json** writes a
+  file you can send.
+- **Sessions folder (Chrome and Edge):** Session ▾ → **Folders on this computer…** → *Choose a sessions folder*.
+  Each session is then a plain `<name>.contact-studio.json` file there (visible in Finder, backed up with
+  your files, not limited by browser storage), Save goes there by default, and Open lists it first. Delete
+  removes the file after asking. The files hold no paths and no permissions: they open on any computer.
 - **Session ▾ → Share link…** makes a link (`…/index.html#s=…`) that contains the whole session (views,
   windows, samples, tracks, display settings) in compressed form. Whoever opens it sees the same views;
   GEO and web files are downloaded from their source when the link is opened. Local files stay on your
@@ -166,13 +268,34 @@ sign-in is needed.
   (cut off, a trailing `.` or `)`, percent-encoded by a mail program, broken across lines) is repaired
   when the damage is obvious; otherwise the page says what is wrong and leaves the link in the address
   bar so it can be copied.
-- **Reopening local files:** in Chrome (other browsers untested), files you open with **+ Sample** or by dropping them are
-  remembered (the browser stores a permission handle, never the file contents). When you reopen a session,
-  a **Reconnect N files** button asks the browser for permission for all of them with one click and
-  reattaches files whose name and size (and date, when known) match. A stored file with the same name but
-  another size or date is only offered for confirmation. A file that was moved or deleted is reported
-  once in plain words, with **Choose files…** to pick it again. Without that API (Firefox, Safari:
-  untested), choose or drop the files again; they are matched by name and size.
+- **Reopening local files: what is automatic where.** Browsers never tell a page where a file is, so a session
+  records each local file's name, size and date, and, when the file is inside a remembered **data folder**,
+  that folder's name and the file's place in it (for example `labA` + `maps/inter_30.hic`; never the full
+  path). When a session opens, the page looks in this order: the recorded data folder and place, the other
+  data folders (same place, then same name and size, date as tie-breaker), then files you opened before
+  with + Sample, + Track or by dropping them.
+  - *Chrome and Edge, web page (or a served copy):* whatever the browser already allows opens **with no click**:
+    in the same visit, or always once you chose **"Allow on every visit"** in the browser's question. The rest
+    gets one click, and the bar says how many questions follow. Chrome asks **once per folder, not once per
+    file**: files inside a remembered data folder are reopened through the folder (one question for all of
+    them); when several files lie in no remembered folder, the bar first offers **Allow the folder once…**
+    (a folder picker opening where the files are; the folder is then remembered), and *Reconnect N files one
+    by one* second. Remember data folders under Session ▾ → Folders on this computer (or drop a folder on the
+    page): one permission covers every file inside, also files you never opened one by one, and the many
+    `inter_30.hic` are told apart by their place. A file not at its recorded place is searched for in the
+    folder by name and size (up to 2 million entries or 30 s per folder; a search cut short says so). Chrome
+    does not hand out your home folder itself, Documents, Desktop, Downloads, Library or system folders:
+    choose a folder inside them (external and network drives work). Data folders and files are only ever asked
+    for reading; the sessions folder asks to read when you open a session and to write only when you save or
+    delete one.
+  - *Chrome and Edge, `index.html` opened from disk:* the same, except that Chrome cannot remember the answer
+    there: after every restart a session asks again (once per data folder). Use the web page to avoid this.
+  - *Safari, Firefox, and the copy inside Claude:* no file or folder can be kept, so nothing reopens by
+    itself. **Choose the folder with the files…** in the bar reattaches every matching file at once; your
+    browser may call this an "upload": nothing leaves the computer. Inside Claude, dropped files can still
+    be reconnected with one click (not tested inside Claude itself).
+  A stored file with the same name but another size or date is only offered for confirmation; a file that
+  was moved or deleted is reported once in plain words, with **Choose files…** to pick it again.
 
 ## Privacy and security
 
@@ -186,13 +309,20 @@ The app has no server, and it never sends your maps, tracks or sessions anywhere
 - **Only on your action:** GEO (Load from GEO…, GEO sessions), the ENCODE and 4DN buckets (From ENCODE /
   4DN…, sessions naming those files), UCSC `hgdownload.soe.ucsc.edu` (gene files when you choose, or the
   page detects, a genome other than hg19, hg38 and mm10), Dropbox and other servers whose links you paste
-  or whose files a session names (after asking, see below). Each of these sees your IP address and which
-  file is read, nothing else.
+  or whose files a session names (after asking, see below), Google Cloud Storage (`storage.googleapis.com`)
+  for `gs://` files, and Google's sign-in (`accounts.google.com`, only when you click Sign in with Google).
+  Each of these sees your IP address and which file is read, nothing else.
+- **What Google sees when you read Google Cloud files:** your IP address; the bucket and file names (they are
+  in every request's address); which parts of each file are read; and, for buckets that refused to be read
+  without it, your access token in the request header, which tells Google which account reads. Buckets that
+  can be read anonymously never get the token. Google's sign-in window (only when you click Sign in with
+  Google) sees your Google account, as any Google sign-in does.
 
 It reads GEO records and files over HTTPS only, renders
 everything it reads as plain text, and checks every imported session or link against a fixed schema
-(unknown fields dropped, sizes bounded, only GEO or `https://` sources accepted; ENCODE and 4DN entries
-only when they point at their own bucket). A session or link that names files on servers other than GEO
+(unknown fields dropped, sizes bounded, only GEO, `https://` or Google Cloud bucket + file sources accepted;
+ENCODE and 4DN entries only when they point at their own bucket). Google Cloud files named by a session are
+asked about per bucket. A session or link that names files on servers other than GEO
 and the ENCODE and 4DN buckets lists those servers and asks before anything is requested from them (the
 answer holds until the page is closed). The catalog indexes are treated as untrusted data too: every row
 is checked (accession format, address on the catalog's own bucket, size a whole number) and shown as plain
@@ -206,6 +336,7 @@ and nothing it sent is used unless you agree. GEO requests do not follow redirec
 ## Files
 
 - `index.html` — the app (one file).
+- `contact-studio.config.js` — deploy settings (the Google sign-in client ID); edit it, the build keeps it.
 - `genomes/` — chromosome-size-matched annotations: RefSeq genes for hg19, hg38 and mm10; Roadmap
   chromHMM (GM12878 E116, K562 E123) for hg19 and hg38; `registry.json`, the list of the 35 other
   assemblies (chromosome lengths and where their gene files are). Each file also has a `.js` copy used
